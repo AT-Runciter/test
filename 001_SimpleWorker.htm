@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Worker</title>
+    <script>
+        // створення потоку (Web Worker).
+        if (window.Worker) {
+            // Створення нового екземпляра Worker
+            let worker = new Worker("worker1.js");
+            // Надсилання даних потоку.
+            // Коли воркер отримає повідомлення, в ньому відбудеться message
+            worker.postMessage('Hello world');
+            // Прив'язка обробника на подію message, яка буде виникати у разі, якщо потік надсилає дані.
+            worker.addEventListener("message", function (e) {
+                document.getElementById("output").innerHTML = e.data;
+            }, true);
+        }
+    </script>
+</head>
+<body>
+    <div>Відповідь потоку: <span id="output">...</span></div>
+</body>
+</html>
